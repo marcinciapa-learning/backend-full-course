@@ -31,3 +31,30 @@
   *Filter Chain* in Spring.
 - The convenient way of sending responses in express is
   `res.status(200).send('data')`.
+
+### Chapter 3 - NodeJS & SQLite Backend
+
+- *.env* file is a convenient way of maintaining environment variable for local
+  run, both in Java and JS projects.
+- In Node exctracting environment variables is easy: `process.env.PORT`.
+- *public* is a canonical directory for serving static content. The dir name is
+  a convention, it can be any other name as well. `express.static()` tells the
+  application where to find the public directory.
+- To allow something (constant, function) to be accessible in different files in
+  the project, it needs to be exported. When we export something in one file, it
+  can be imported into another. Import name doesn't have to match the exported name.
+- If we distribute our endpoints across different files in the project, we have
+  to use `express.Router()`, assign it to a var/const and export. It needs to be
+  imported in the app file and used as following: `app.use('/auth', authRoute)`.
+- In express path params are provided in following format: `/:id`.
+- JSON request body can be deconstructed: `const {username, password} = req.body`.
+- JS provides convenient way of dealing with DB prepared statements:
+  `const a = db.prepare('SELECT ...'); a.get('username')`.
+- Authentication middleware (custom) can be capable of adding `req.userId`
+  (not `req.body.userId`).
+- The course suggests providing JWT token in the requesst using *Authorization*
+  header.
+- In the solution, in authRoutes, user ID is encoded within the token using
+  secret, so it's possible to decode it using the same secret in the auth middleware.
+- The ID of the entry inserted into DB can be obtained using `result.lastInsertRowID`.
+  `result` is a returned value of `stmt.run()`.
